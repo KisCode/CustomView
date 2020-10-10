@@ -5,11 +5,13 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.BitmapShader;
+import android.graphics.BlendMode;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
+import android.graphics.ComposeShader;
 import android.graphics.LightingColorFilter;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
@@ -167,6 +169,7 @@ public class PaintView extends View {
         mPaint.setShader(shader);
         canvas.drawCircle(100,100,100,mPaint);
         */
+/*
 
         //SweepGradient 设置绕着某中心点进行360度旋转渐变效果
 //        Shader shader = new SweepGradient(100, 100, Color.RED, Color.GREEN);
@@ -174,7 +177,18 @@ public class PaintView extends View {
         Shader shader = new SweepGradient(100, 100, new int[]{Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW}, new float[]{0, 0.25f, 0.5f, 1f});
         mPaint.setShader(shader);
         canvas.drawCircle(100, 100, 100, mPaint);
+*/
 
+        //组合渲染ComposeShader ，将两种shader组合
+        //组合模式PorterDuff.Mode
+        BitmapShader bitmapShader = new BitmapShader(mBitmap, Shader.TileMode.CLAMP, Shader.TileMode.REPEAT);
+//        LinearGradient linearGradient = new LinearGradient(0, 0, 250, 250, Color.RED, Color.GREEN, Shader.TileMode.MIRROR);
+//        Shader shader = new ComposeShader(bitmapShader, linearGradient, PorterDuff.Mode.MULTIPLY);
+        Shader radialGradient = new RadialGradient(500, 500, 500, Color.RED, Color.BLUE, Shader.TileMode.REPEAT);
+        Shader shader = new ComposeShader(bitmapShader, radialGradient, PorterDuff.Mode.MULTIPLY);
+        mPaint.setShader(shader);
+        canvas.drawCircle(500,500,500,mPaint);
 
+//        Paint.setXfermode(Xfermode)
     }
 }
