@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.kiscode.ui.view.XfermodeView;
+import com.kiscode.ui.view.XfermodesView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -12,6 +13,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_main);
-        setContentView(new XfermodeView(this));
+        setContentView(new XfermodesView(this));
     }
 }
