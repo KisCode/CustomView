@@ -59,7 +59,7 @@ public class XfermodeView extends View {
         //绘制DST
         canvas.drawBitmap(createRectBitmap(mWidth, mHeight), 0, 0, mPaint);
         //设置混合模式
-        mPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_ATOP));
+        mPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DARKEN));
         //绘制SRC
         canvas.drawBitmap(createCircleBitmap(mWidth, mHeight), 0, 0, mPaint);
 
