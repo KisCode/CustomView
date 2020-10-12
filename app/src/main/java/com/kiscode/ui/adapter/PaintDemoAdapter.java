@@ -8,6 +8,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.kiscode.ui.fragment.RectFragment;
+import com.kiscode.ui.fragment.XfermodeFragment;
+import com.kiscode.ui.fragment.XfermodesFragment;
 import com.kiscode.ui.pojo.TabItem;
 
 
@@ -19,8 +21,8 @@ import com.kiscode.ui.pojo.TabItem;
 public class PaintDemoAdapter extends FragmentPagerAdapter {
 
     private static final TabItem[] TAB_ITEMS = new TabItem[]{
-            new TabItem("Rect", RectFragment.class.getName()),
-            new TabItem("Rect2", RectFragment.class.getName()),
+            new TabItem("XfermodeMode All", XfermodesFragment.class.getName()),
+            new TabItem("XfermodeMode", XfermodeFragment.class.getName()),
             new TabItem("Rect2", RectFragment.class.getName()),
             new TabItem("Rect", RectFragment.class.getName()),
             new TabItem("Rect6", RectFragment.class.getName()),
