@@ -7,10 +7,13 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.kiscode.ui.fragment.RectFragment;
-import com.kiscode.ui.fragment.XfermodeFragment;
-import com.kiscode.ui.fragment.XfermodesFragment;
+import com.kiscode.ui.fragment.PaintSampleFragment;
 import com.kiscode.ui.pojo.TabItem;
+import com.kiscode.ui.view.paint.BitmapShaderView;
+import com.kiscode.ui.view.paint.LinearGradientShaderView;
+import com.kiscode.ui.view.XfermodesView;
+import com.kiscode.ui.view.paint.RadialGradientShaderView;
+import com.kiscode.ui.view.paint.SweepGradientShaderView;
 
 
 /****
@@ -21,13 +24,12 @@ import com.kiscode.ui.pojo.TabItem;
 public class PaintDemoAdapter extends FragmentPagerAdapter {
 
     private static final TabItem[] TAB_ITEMS = new TabItem[]{
-            new TabItem("XfermodeMode All", XfermodesFragment.class.getName()),
-            new TabItem("XfermodeMode", XfermodeFragment.class.getName()),
-            new TabItem("Rect2", RectFragment.class.getName()),
-            new TabItem("Rect", RectFragment.class.getName()),
-            new TabItem("Rect6", RectFragment.class.getName()),
-            new TabItem("Rect7", RectFragment.class.getName()),
-            new TabItem("Circle", RectFragment.class.getName())
+            new TabItem("XfermodeMode", XfermodesView.class.getName()),
+            new TabItem("LinearGradient", LinearGradientShaderView.class.getName()),
+            new TabItem("RadialGradient", RadialGradientShaderView.class.getName()),
+            new TabItem("SweepGradient", SweepGradientShaderView.class.getName()),
+            new TabItem("BitmapShader", BitmapShaderView.class.getName()),
+            new TabItem("RadialGradient", RadialGradientShaderView.class.getName())
     };
     private FragmentManager mFm;
 
@@ -39,8 +41,9 @@ public class PaintDemoAdapter extends FragmentPagerAdapter {
     @NonNull
     @Override
     public Fragment getItem(int position) {
-        String className = TAB_ITEMS[position].getClassName();
-        return mFm.getFragmentFactory().instantiate(getClass().getClassLoader(), className);
+        String className = TAB_ITEMS[position].getViewClasName();
+//        return mFm.getFragmentFactory().instantiate(getClass().getClassLoader(), className);
+        return PaintSampleFragment.newInstance(className);
     }
 
     @Nullable

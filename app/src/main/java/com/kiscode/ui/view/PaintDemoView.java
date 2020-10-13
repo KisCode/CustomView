@@ -5,23 +5,13 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.BitmapShader;
-import android.graphics.BlendMode;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.ColorFilter;
-import android.graphics.ColorMatrix;
-import android.graphics.ColorMatrixColorFilter;
 import android.graphics.ComposeShader;
-import android.graphics.LightingColorFilter;
-import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
 import android.graphics.RadialGradient;
 import android.graphics.Shader;
-import android.graphics.SweepGradient;
-import android.graphics.Typeface;
-import android.provider.CalendarContract;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -35,19 +25,19 @@ import com.kiscode.ui.R;
  * CreateDate: 2020/10/5 10:10
  */
 
-public class PaintView extends View {
+public class PaintDemoView extends View {
     private Paint mPaint;
     private Bitmap mBitmap;
 
-    public PaintView(Context context) {
+    public PaintDemoView(Context context) {
         this(context, null, 0);
     }
 
-    public PaintView(Context context, @Nullable AttributeSet attrs) {
+    public PaintDemoView(Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public PaintView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public PaintDemoView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         mPaint = new Paint();
         mBitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.timg);

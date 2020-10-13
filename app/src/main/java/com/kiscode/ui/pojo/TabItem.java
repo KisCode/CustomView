@@ -10,11 +10,11 @@ package com.kiscode.ui.pojo;
 public class TabItem {
 
     private String title;
-    private String className;
+    private String viewClasName;
 
-    public TabItem(String title, String className) {
+    public TabItem(String title, String viewClasName) {
         this.title = title;
-        this.className = className;
+        this.viewClasName = viewClasName;
     }
 
     public String getTitle() {
@@ -25,11 +25,11 @@ public class TabItem {
         this.title = title;
     }
 
-    public String getClassName() {
-        return className;
+    public String getViewClasName() {
+        return viewClasName;
     }
 
-    public void setClassName(String className) {
-        this.className = className;
+    public void setViewClasName(String viewClasName) {
+        this.viewClasName = viewClasName;
     }
 }
