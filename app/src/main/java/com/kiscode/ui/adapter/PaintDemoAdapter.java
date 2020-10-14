@@ -9,13 +9,6 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.kiscode.ui.fragment.PaintSampleFragment;
 import com.kiscode.ui.pojo.TabItem;
-import com.kiscode.ui.view.paint.BitmapShaderView;
-import com.kiscode.ui.view.paint.BlurMaskFilterView;
-import com.kiscode.ui.view.paint.EmbossMaskFilterView;
-import com.kiscode.ui.view.paint.LinearGradientShaderView;
-import com.kiscode.ui.view.XfermodesView;
-import com.kiscode.ui.view.paint.RadialGradientShaderView;
-import com.kiscode.ui.view.paint.SweepGradientShaderView;
 
 
 /****
@@ -24,27 +17,18 @@ import com.kiscode.ui.view.paint.SweepGradientShaderView;
  * CreateDate: 2020/10/12 23:05
  */
 public class PaintDemoAdapter extends FragmentPagerAdapter {
-
-    private static final TabItem[] TAB_ITEMS = new TabItem[]{
-            new TabItem("XfermodeMode", XfermodesView.class.getName()),
-            new TabItem("LinearGradient", LinearGradientShaderView.class.getName()),
-            new TabItem("RadialGradient", RadialGradientShaderView.class.getName()),
-            new TabItem("SweepGradient", SweepGradientShaderView.class.getName()),
-            new TabItem("BitmapShader", BitmapShaderView.class.getName()),
-            new TabItem("BlurMaskFilter", BlurMaskFilterView.class.getName()),
-            new TabItem("EmbossMaskFilter", EmbossMaskFilterView.class.getName())
-    };
+    private TabItem[] mItemArr;
     private FragmentManager mFm;
 
-    public PaintDemoAdapter(@NonNull FragmentManager fm, int behavior) {
+    public PaintDemoAdapter(@NonNull FragmentManager fm, int behavior, com.kiscode.ui.pojo.TabItem[] tabItem) {
         super(fm, behavior);
-        this.mFm = fm;
+        mItemArr = tabItem;
     }
 
     @NonNull
     @Override
     public Fragment getItem(int position) {
-        String className = TAB_ITEMS[position].getViewClasName();
+        String className = mItemArr[position].getViewClasName();
 //        return mFm.getFragmentFactory().instantiate(getClass().getClassLoader(), className);
         return PaintSampleFragment.newInstance(className);
     }
@@ -52,11 +36,11 @@ public class PaintDemoAdapter extends FragmentPagerAdapter {
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
-        return TAB_ITEMS[position].getTitle();
+        return mItemArr[position].getTitle();
     }
 
     @Override
     public int getCount() {
-        return TAB_ITEMS.length;
+        return mItemArr.length;
     }
 }

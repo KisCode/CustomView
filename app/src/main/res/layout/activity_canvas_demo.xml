@@ -6,4 +6,23 @@
     android:layout_height="match_parent"
     tools:context="com.kiscode.ui.CanvasDemoActivity">
 
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tablayout_canvas_demo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tabIndicatorColor="@color/colorPrimary"
+        app:tabSelectedTextColor="@color/colorPrimary"
+        app:tabMode="scrollable"
+        app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
+        app:tabTextColor="@android:color/darker_gray" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewpager_canvas_demo"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/bg_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tablayout_canvas_demo" />
 </androidx.constraintlayout.widget.ConstraintLayout>
