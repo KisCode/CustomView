@@ -10,6 +10,8 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import com.kiscode.ui.fragment.PaintSampleFragment;
 import com.kiscode.ui.pojo.TabItem;
 import com.kiscode.ui.view.paint.BitmapShaderView;
+import com.kiscode.ui.view.paint.BlurMaskFilterView;
+import com.kiscode.ui.view.paint.EmbossMaskFilterView;
 import com.kiscode.ui.view.paint.LinearGradientShaderView;
 import com.kiscode.ui.view.XfermodesView;
 import com.kiscode.ui.view.paint.RadialGradientShaderView;
@@ -29,7 +31,8 @@ public class PaintDemoAdapter extends FragmentPagerAdapter {
             new TabItem("RadialGradient", RadialGradientShaderView.class.getName()),
             new TabItem("SweepGradient", SweepGradientShaderView.class.getName()),
             new TabItem("BitmapShader", BitmapShaderView.class.getName()),
-            new TabItem("RadialGradient", RadialGradientShaderView.class.getName())
+            new TabItem("BlurMaskFilter", BlurMaskFilterView.class.getName()),
+            new TabItem("EmbossMaskFilter", EmbossMaskFilterView.class.getName())
     };
     private FragmentManager mFm;
 
