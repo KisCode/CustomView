@@ -26,10 +26,9 @@ import java.util.List;
  * Author:  keno
  * CreateDate: 2020/10/15 22:12
  */
-
 public class ParticleView extends View {
-    //设定粒子像素为4
-    private static final float SIZE_BALL = 2;
+    //设定粒子像素为16
+    private static final float SIZE_BALL = 16;
     private Paint mPaint;
     private Bitmap mBitmap;
     private ValueAnimator mAnimator;
@@ -51,28 +50,26 @@ public class ParticleView extends View {
     private void init() {
         mPaint = new Paint();
 
-        Bitmap srcBitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.icon_baidu);
-        Matrix matrix = new Matrix();
-        matrix.setScale(0.2f, 0.2f);
-        mBitmap = Bitmap.createBitmap(srcBitmap, 0, 0, srcBitmap.getWidth(), srcBitmap.getHeight(), matrix, true);
-
+        mBitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.icon_baidu);
 
         int bitmapWidth = mBitmap.getWidth();
         int bitmapHeight = mBitmap.getHeight();
-        for (int i = 0; i < bitmapWidth; i++) {
-            for (int j = 0; j < bitmapHeight; j++) {
+        for (int i = 0; i < bitmapWidth; i += SIZE_BALL) {
+            for (int j = 0; j < bitmapHeight; j += SIZE_BALL) {
                 ParticleBall ball = new ParticleBall();
                 //返回指定像素点的颜色
                 ball.color = mBitmap.getPixel(i, j);
                 ball.r = SIZE_BALL / 2;
-                ball.x = i * SIZE_BALL + ball.r;
-                ball.y = j * SIZE_BALL + ball.r;
+//                ball.x = i * SIZE_BALL + ball.r;
+//                ball.y = j * SIZE_BALL + ball.r;
+                ball.x = i;
+                ball.y = j;
 
                 // 速度(-20,20)
                 //Math.pow(x,y)  x的y次幂
                 //Math.ceil 向上取整
                 ball.vX = (float) (Math.pow(-1, Math.ceil(Math.random() * 1000)) * 20 * Math.random());
-                ball.vY = rangeInt(-15, 25);
+                ball.vY = rangeInt(-5, 25);
                 ball.aX = 0;
                 ball.aY = 0.98f;
                 mBalls.add(ball);
@@ -117,11 +114,16 @@ public class ParticleView extends View {
         super.onDraw(canvas);
 
         //平移
-        canvas.translate(500, 500);
-
-        for (ParticleBall ball : mBalls) {
-            mPaint.setColor(ball.color);
-            canvas.drawCircle(ball.x, ball.y, ball.r, mPaint);
+        canvas.translate(100, 100);
+        if (mBitmap != null) {
+            canvas.drawBitmap(mBitmap, 100, 100, mPaint);
+            mBitmap.recycle();
+            mBitmap = null;
+        } else {
+            for (ParticleBall ball : mBalls) {
+                mPaint.setColor(ball.color);
+                canvas.drawCircle(ball.x, ball.y, ball.r, mPaint);
+            }
         }
     }
 
