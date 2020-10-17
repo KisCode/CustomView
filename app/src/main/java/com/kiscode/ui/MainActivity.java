@@ -8,8 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button btnPaint;
-    private Button btnCanvans;
+    private Button btnPaint, btnCanvans, btnSplash;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,9 +20,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void initView() {
         btnPaint = findViewById(R.id.btn_paint);
         btnCanvans = findViewById(R.id.btn_canvas);
+        btnSplash = findViewById(R.id.btn_splash);
 
         btnPaint.setOnClickListener(this);
         btnCanvans.setOnClickListener(this);
+        btnSplash.setOnClickListener(this);
     }
 
     @Override
@@ -35,6 +36,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_canvas:
                 CanvasDemoActivity.start(this);
 //                TabActivity.start(this);
+                break;
+            case R.id.btn_splash:
+                SplashActivity.start(this);
                 break;
         }
     }

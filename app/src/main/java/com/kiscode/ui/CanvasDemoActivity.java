@@ -11,6 +11,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.kiscode.ui.adapter.PaintDemoAdapter;
 import com.kiscode.ui.pojo.TabItem;
 import com.kiscode.ui.view.ParticleView;
+import com.kiscode.ui.view.SplashView;
 import com.kiscode.ui.view.XfermodesView;
 import com.kiscode.ui.view.canvas.CanvasDemoView;
 import com.kiscode.ui.view.paint.BitmapShaderView;
@@ -26,7 +27,8 @@ public class CanvasDemoActivity extends AppCompatActivity {
 
     private static final TabItem[] TAB_ITEMS = new TabItem[]{
             new TabItem("Canvas", CanvasDemoView.class.getName()),
-            new TabItem("粒子特效", ParticleView.class.getName())
+            new TabItem("粒子特效", ParticleView.class.getName()),
+            new TabItem("SplashView", SplashView.class.getName())
     };
 
     public static void start(Context context) {
