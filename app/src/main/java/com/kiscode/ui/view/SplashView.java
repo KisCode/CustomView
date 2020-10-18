@@ -120,7 +120,7 @@ public class SplashView extends View {
         }
     }
 
-    private abstract class SplashState {
+    private static abstract class SplashState {
         abstract void drawState(Canvas canvas);
     }
 
