@@ -1,4 +1,4 @@
-package com.kiscode.ui.view;
+package com.kiscode.ui.view.paint;
 
 import android.content.Context;
 import android.graphics.Bitmap;

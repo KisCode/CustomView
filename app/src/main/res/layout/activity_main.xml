@@ -18,4 +18,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Canvans" />
+
+    <Button
+        android:id="@+id/btn_path"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Path" />
+
+    <Button
+        android:id="@+id/btn_splash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SplashView" />
+
+    <Button
+        android:id="@+id/btn_drag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Drag Badge " />
 </LinearLayout>
