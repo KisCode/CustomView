@@ -2,6 +2,8 @@ package com.kiscode.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 /**
@@ -11,6 +13,10 @@ import android.os.Bundle;
  */
 public class ScrapCardActivity extends AppCompatActivity {
 
+    public static void start(Context context) {
+        Intent starter = new Intent(context, ScrapCardActivity.class);
+        context.startActivity(starter);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

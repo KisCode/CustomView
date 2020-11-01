@@ -26,6 +26,12 @@
         android:text="Path" />
 
     <Button
+        android:id="@+id/btn_scrap_card"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ScrapCard" />
+
+    <Button
         android:id="@+id/btn_splash"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

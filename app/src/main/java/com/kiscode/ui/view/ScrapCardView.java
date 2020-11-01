@@ -3,11 +3,14 @@ package com.kiscode.ui.view;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
-import android.graphics.drawable.BitmapDrawable;
+import android.graphics.Path;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -19,13 +22,19 @@ import com.kiscode.ui.R;
 
 /****
  * Description: 刮刮卡
+ * 实现思路：
+ * 1. 绘制刮开图片作为底图
+ * 2. 离屏绘制手指滑动区域 + 前景图 使用PorterDuff.Mode.SRC_OUT 显示上层非交集区域
+ mPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_OUT));
+ *
  * Author:  keno
  * CreateDate: 2020/10/11 17:15
  */
 public class ScrapCardView extends View {
     private Paint mPaint;
-    private Bitmap mDstBitmap, mSrcBitmap;
-    private int mWidth, mHeight;
+    private Path mPath;
+    private Bitmap mResultBitmap, mForgroundBitmap, mPathBitmap;
+    private float mEventX, mEventY;
     private int mBitmapWidth, mBitmapHeight;
 
     public ScrapCardView(Context context) {
@@ -45,13 +54,18 @@ public class ScrapCardView extends View {
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
         mPaint.setColor(Color.LTGRAY);
-        mPaint.setStyle(Paint.Style.FILL);
+        mPaint.setStyle(Paint.Style.STROKE);
+        mPaint.setStrokeWidth(100);
+        //设置圆形线帽
+        mPaint.setStrokeCap(Paint.Cap.ROUND);
 
         //初始化图片
-        BitmapDrawable bitmapDrawable = (BitmapDrawable) getResources().getDrawable(R.drawable.scraping_card);
-        mSrcBitmap = bitmapDrawable.getBitmap();
-        mBitmapWidth = mSrcBitmap.getWidth();
-        mBitmapHeight = mSrcBitmap.getHeight();
+        mResultBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.card_result);
+        mForgroundBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.scraping_card);
+        mBitmapWidth = mResultBitmap.getWidth();
+        mBitmapHeight = mResultBitmap.getHeight();
+
+        mPath = new Path();
     }
 
     @Override
@@ -93,10 +107,8 @@ public class ScrapCardView extends View {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
         Log.d("onSizeChanged", "onSizeChanged,w = " + w + ",h = " + h + ",mBitWidth = " + mBitmapWidth + ",mBitHeight = " + mBitmapHeight);
-        mWidth = w;
-        mHeight = h;
-        float scaleX = (float) mBitmapWidth / mWidth;
-        float scaleY = (float) mBitmapHeight / mHeight;
+        float scaleX = (float) mBitmapWidth / w;
+        float scaleY = (float) mBitmapHeight / h;
         float scacle = 1;
         if (scaleX >= 1 && scaleX >= scaleY) {
             scacle = 1 / scaleX;
@@ -106,18 +118,56 @@ public class ScrapCardView extends View {
 
         Matrix matrix = new Matrix();
         matrix.setScale(scacle, scacle);
-        mDstBitmap = Bitmap.createBitmap(mSrcBitmap, 0, 0, mBitmapWidth, mBitmapHeight, matrix, true);
+        //图片进行缩放
+        mResultBitmap = Bitmap.createBitmap(mResultBitmap, 0, 0, mBitmapWidth, mBitmapHeight, matrix, true);
+        mForgroundBitmap = Bitmap.createBitmap(mForgroundBitmap, 0, 0, mBitmapWidth, mBitmapHeight, matrix, true);
+        //路径图片
+        mPathBitmap = Bitmap.createBitmap(mResultBitmap.getWidth(), mResultBitmap.getHeight(), Bitmap.Config.ARGB_8888);
+
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        Log.i("onDraw", mBitmapWidth + "-" + mBitmapHeight + "\tcanvas:" + canvas);
-        canvas.drawBitmap(mDstBitmap, 0, 0, mPaint);
+        Log.i("onDraw", mBitmapWidth + "-" + mBitmapHeight);
+
+        //绘制彩票刮开后显示结果图片
+        canvas.drawBitmap(mResultBitmap, 0, 0, mPaint);
+        //开启离屏绘制
+        int layerId = canvas.saveLayer(0, 0, mResultBitmap.getWidth(), mResultBitmap.getHeight(), mPaint);
+
+        //先绘制路径
+        Canvas dstCanvas = new Canvas(mPathBitmap);
+        dstCanvas.drawPath(mPath, mPaint);
+        canvas.drawBitmap(mPathBitmap, 0, 0, mPaint);
+        // 显示上层非交集区域
+        mPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_OUT));
+        canvas.drawBitmap(mForgroundBitmap, 0, 0, mPaint);
+        mPaint.setXfermode(null);
+        canvas.restoreToCount(layerId);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        return super.onTouchEvent(event);
+        super.onTouchEvent(event);
+
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                mEventX = event.getX();
+                mEventY = event.getY();
+                mPath.moveTo(mEventX, mEventY);
+                break;
+            case MotionEvent.ACTION_MOVE:
+                float endX = (event.getX() - mEventX) / 2 + mEventX;
+                float endY = (event.getY() - mEventY) / 2 + mEventY;
+                //画二阶贝塞尔曲线
+                mPath.quadTo(mEventX, mEventY, endX, endY);
+                mEventX = event.getX();
+                mEventY = event.getY();
+                break;
+        }
+        invalidate();
+        return true;
+
     }
 }
