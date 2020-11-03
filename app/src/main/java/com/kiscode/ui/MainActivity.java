@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button btnPaint, btnCanvans,btnPath, btnSplash, btnDrag;
+    private Button btnPaint, btnCanvans, btnPath, btnSplash, btnDrag, btnScrapCard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,12 +23,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnSplash = findViewById(R.id.btn_splash);
         btnDrag = findViewById(R.id.btn_drag);
         btnPath = findViewById(R.id.btn_path);
+        btnPath = findViewById(R.id.btn_path);
+        btnScrapCard = findViewById(R.id.btn_scrap_card);
 
         btnPaint.setOnClickListener(this);
         btnCanvans.setOnClickListener(this);
         btnSplash.setOnClickListener(this);
         btnDrag.setOnClickListener(this);
         btnPath.setOnClickListener(this);
+        btnScrapCard.setOnClickListener(this);
     }
 
     @Override
@@ -43,6 +46,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn_splash:
                 SplashActivity.start(this);
+                break;
+            case R.id.btn_scrap_card:
+                ScrapCardActivity.start(this);
                 break;
             case R.id.btn_drag:
                 DragBadgeActivity.start(this);
