@@ -6,6 +6,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="textAllCaps">false</item>
+        <item name="android:colorBackground">@color/bg_color</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -16,5 +17,24 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="style_dashline">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">16dp</item>
+        <item name="dash_circle_radius">8dp</item>
+        <item name="dash_stroke_color">@color/bg_color</item>
+        <item name="dash_circle_color">@color/bg_color</item>
+        <item name="dash_stroke_distance">10</item>
+        <item name="dash_stroke_internal">30</item>
+        <item name="dash_stroke_padding">2dp</item>
+        <item name="dash_stroke_width">1dp</item>
+    </style>
+
+    <style name="style_button_home">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">12dp</item>
+    </style>
+
 
 </resources>

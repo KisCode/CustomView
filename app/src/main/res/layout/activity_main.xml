@@ -3,43 +3,53 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="12dp"
+    android:background="@drawable/shape_bg_card"
     android:orientation="vertical"
+    android:paddingTop="12dp"
+    android:paddingBottom="12dp"
     tools:context=".MainActivity">
 
     <Button
         android:id="@+id/btn_paint"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/style_button_home"
         android:text="Paint" />
+
+    <com.kiscode.ui.view.DashLineView
+        style="@style/style_dashline" />
 
     <Button
         android:id="@+id/btn_canvas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/style_button_home"
         android:text="Canvans" />
+
+    <com.kiscode.ui.view.DashLineView style="@style/style_dashline" />
 
     <Button
         android:id="@+id/btn_path"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/style_button_home"
         android:text="Path" />
+
+    <com.kiscode.ui.view.DashLineView style="@style/style_dashline" />
 
     <Button
         android:id="@+id/btn_scrap_card"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/style_button_home"
         android:text="ScrapCard" />
+
+    <com.kiscode.ui.view.DashLineView style="@style/style_dashline" />
 
     <Button
         android:id="@+id/btn_splash"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/style_button_home"
         android:text="SplashView" />
+
+    <com.kiscode.ui.view.DashLineView style="@style/style_dashline" />
 
     <Button
         android:id="@+id/btn_drag"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/style_button_home"
         android:text="Drag Badge " />
+
 </LinearLayout>

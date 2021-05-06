@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="DashLineView">
+        <!--    线宽度    -->
+        <attr name="dash_stroke_width" format="dimension" />
+        <!--    每段长度    -->
+        <attr name="dash_stroke_internal" format="integer" />
+        <!--    间隔值    -->
+        <attr name="dash_stroke_distance" format="integer" />
+        <!--    线颜色    -->
+        <attr name="dash_stroke_color" format="color" />
+        <!--    线与左右间距    -->
+        <attr name="dash_stroke_padding" format="dimension" />
+        <!--    半径    -->
+        <attr name="dash_circle_radius" format="dimension" />
+        <!--    半圆颜色    -->
+        <attr name="dash_circle_color" format="color" />
+    </declare-styleable>
+
+</resources>
